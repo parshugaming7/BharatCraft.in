@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BHARATCRAFT ✨ - Official Server</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Noto+Sans+Devanagari:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --saffron: #FF6B00;
+    --gold: #FFD700;
+    --deep-gold: #C8960C;
+    --emerald: #00C48C;
+    --ruby: #E8174A;
+    --sapphire: #1A6EFF;
+    --diamond: #00EEFF;
+    --amethyst: #9B59B6;
+    --dark-bg: #0A0A0F;
+    --card-bg: #10101A;
+    --card-border: rgba(255,215,0,0.15);
+    --text-primary: #F5E6C8;
+    --text-muted: #9A8A6A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Rajdhani', sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ─── STARFIELD ─── */
+  #stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% 40%, rgba(255,107,0,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 70%, rgba(0,196,140,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 50% 10%, rgba(255,215,0,0.05) 0%, transparent 50%),
+      #0A0A0F;
+  }
+  #stars::before, #stars::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 30% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 70%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 55%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 65% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 5%, rgba(255,215,0,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 92% 85%, rgba(255,107,0,0.4) 0%, transparent 100%);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+  #stars::after {
+    background-image:
+      radial-gradient(1px 1px at 15% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 30%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 75%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 30%, rgba(255,215,0,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 90%, rgba(255,255,255,0.5) 0%, transparent 100%);
+    animation-delay: 2s;
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.6; } 100% { opacity: 1; }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,215,0,0.12);
+  }
+  .nav-logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--saffron), var(--gold), var(--saffron));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-ip {
+    background: linear-gradient(135deg, var(--saffron), var(--deep-gold));
+    color: #000;
+    padding: 9px 22px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    border: none;
+  }
+  .nav-ip:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  .hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 24px 60px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,107,0,0.12);
+    border: 1px solid rgba(255,107,0,0.4);
+    color: var(--saffron);
+    padding: 6px 20px;
+    border-radius: 100px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 4px;
+    background: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 40%, #fff 70%, var(--gold) 90%, var(--saffron) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: none;
+    filter: drop-shadow(0 0 40px rgba(255,215,0,0.35));
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-sparkle {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+    display: block;
+    margin-bottom: 8px;
+    animation: fadeUp 0.8s 0.05s ease both, float 3s ease-in-out infinite;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--text-muted);
+    font-weight: 400;
+    letter-spacing: 2px;
+    margin-top: 16px;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-ip-box {
+    margin-top: 40px;
+    background: rgba(255,215,0,0.07);
+    border: 1px solid rgba(255,215,0,0.25);
+    border-radius: 10px;
+    padding: 18px 40px;
+    animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .hero-ip-label { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 6px; }
+  .hero-ip-addr {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    letter-spacing: 4px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .hero-ip-addr:hover { color: #fff; }
+  .hero-cta {
+    margin-top: 36px;
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.8s 0.55s ease both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--saffron), var(--deep-gold));
+    color: #000;
+    padding: 14px 36px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(255,107,0,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,0,0.5); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--gold);
+    padding: 14px 36px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid rgba(255,215,0,0.3);
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--gold); background: rgba(255,215,0,0.07); }
+  .hero-divider {
+    margin-top: 64px;
+    display: flex; align-items: center; gap: 20px;
+    color: var(--text-muted); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase;
+    animation: fadeUp 0.8s 0.65s ease both;
+  }
+  .hero-divider::before, .hero-divider::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+  }
+
+  /* ─── SECTIONS ─── */
+  section { position: relative; z-index: 1; padding: 90px 48px; max-width: 1300px; margin: 0 auto; }
+  .section-header {
+    text-align: center; margin-bottom: 64px;
+  }
+  .section-eyebrow {
+    font-size: 0.75rem; color: var(--saffron); letter-spacing: 4px;
+    text-transform: uppercase; font-weight: 600; margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 2px;
+  }
+  .section-title span {
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  /* ─── RANKS ─── */
+  .ranks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .rank-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    cursor: default;
+  }
+  .rank-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--rank-color, var(--gold));
+    border-radius: 12px 12px 0 0;
+  }
+  .rank-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, var(--rank-glow, rgba(255,215,0,0.06)) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .rank-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--rank-color, var(--gold));
+    box-shadow: 0 16px 48px var(--rank-glow, rgba(255,215,0,0.1));
+  }
+  .rank-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--rank-color, var(--gold));
+    margin-bottom: 16px;
+  }
+  .rank-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--rank-color, var(--gold));
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  .rank-price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+  .rank-price span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+  .rank-perks {
+    list-style: none;
+    margin-top: 20px;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .rank-perks li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 0.9rem; color: #C8B89A; line-height: 1.4;
+  }
+  .rank-perks li::before {
+    content: '✦';
+    color: var(--rank-color, var(--gold));
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    margin-top: 3px;
+  }
+  .rank-btn {
+    width: 100%; margin-top: 24px;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--rank-color, var(--gold));
+    background: transparent;
+    color: var(--rank-color, var(--gold));
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .rank-btn:hover { background: var(--rank-color, var(--gold)); color: #000; }
+  .rank-popular {
+    position: absolute; top: 16px; right: 16px;
+    background: var(--rank-color, var(--gold));
+    color: #000;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  /* ─── CRATE KEYS ─── */
+  .keys-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .key-card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .key-card:hover { transform: translateY(-4px); border-color: var(--key-color); }
+  .key-icon {
+    font-size: 3rem;
+    margin-bottom: 14px;
+    display: block;
+    filter: drop-shadow(0 0 14px var(--key-color, #fff));
+    animation: float 3s ease-in-out infinite;
+  }
+  .key-card:nth-child(2) .key-icon { animation-delay: 0.5s; }
+  .key-card:nth-child(3) .key-icon { animation-delay: 1s; }
+  .key-card:nth-child(4) .key-icon { animation-delay: 1.5s; }
+  .key-card:nth-child(5) .key-icon { animation-delay: 2s; }
+  .key-name {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem;
+    color: var(--key-color, var(--gold));
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .key-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+  .key-rewards {
+    display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .key-reward-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    padding: 3px 9px;
+    font-size: 0.7rem;
+    color: #C8B89A;
+    letter-spacing: 0.5px;
+  }
+  .key-price {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .key-price span { font-size: 0.8rem; color: var(--text-muted); }
+
+  /* ─── FEATURES STRIP ─── */
+  .features-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,215,0,0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 0 48px;
+    position: relative; z-index: 1;
+  }
+  .feature-item {
+    background: var(--dark-bg);
+    padding: 32px 24px;
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .feature-item:hover { background: #0E0E18; }
+  .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+  .feature-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 0.9rem;
+    color: var(--gold);
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .feature-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid rgba(255,215,0,0.08);
+    padding: 48px;
+    display: flex;
+    align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  .footer-logo {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    font-weight: 900; letter-spacing: 2px;
+  }
+  .footer-text { font-size: 0.82rem; color: var(--text-muted); }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ─── TOAST ─── */
+  #toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: rgba(10,10,15,0.95);
+    border: 1px solid rgba(255,215,0,0.3);
+    color: var(--gold);
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    opacity: 0; transition: all 0.3s; z-index: 999;
+    backdrop-filter: blur(8px);
+  }
+  #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-8px); }
+  }
+  @keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+  }
+
+  /* ─── EDIT PANEL ─── */
+  #edit-toggle {
+    position: fixed; bottom: 28px; right: 28px; z-index: 200;
+    background: linear-gradient(135deg, var(--saffron), var(--deep-gold));
+    color: #000;
+    border: none;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255,107,0,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #edit-toggle:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(255,107,0,0.7); }
+
+  #edit-panel {
+    position: fixed; top: 0; right: -420px; bottom: 0;
+    width: 420px; z-index: 150;
+    background: rgba(10,10,18,0.97);
+    border-left: 1px solid rgba(255,215,0,0.15);
+    backdrop-filter: blur(16px);
+    padding: 80px 28px 28px;
+    overflow-y: auto;
+    transition: right 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  #edit-panel.open { right: 0; }
+  .edit-panel-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 1.1rem; color: var(--gold);
+    margin-bottom: 28px; letter-spacing: 2px;
+  }
+  .edit-group { margin-bottom: 24px; }
+  .edit-label {
+    display: block; font-size: 0.72rem; color: var(--text-muted);
+    letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .edit-input, .edit-textarea, .edit-select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,215,0,0.15);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .edit-input:focus, .edit-textarea:focus, .edit-select:focus { border-color: var(--gold); }
+  .edit-section-label {
+    font-size: 0.65rem; color: var(--saffron);
+    letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 700; margin: 28px 0 14px;
+    border-bottom: 1px solid rgba(255,107,0,0.2);
+    padding-bottom: 8px;
+  }
+  .edit-apply {
+    width: 100%; padding: 13px;
+    background: linear-gradient(135deg, var(--saffron), var(--deep-gold));
+    border: none; border-radius: 6px;
+    color: #000; font-family: 'Rajdhani', sans-serif;
+    font-size: 1rem; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .edit-apply:hover { opacity: 0.85; }
+  .edit-close {
+    position: absolute; top: 24px; right: 24px;
+    background: none; border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-muted); width: 36px; height: 36px;
+    border-radius: 50%; cursor: pointer; font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .edit-close:hover { color: var(--ruby); border-color: var(--ruby); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+    section { padding: 60px 20px; }
+    .features-strip { margin: 0 20px; }
+    footer { flex-direction: column; align-items: flex-start; padding: 32px 20px; }
+    #edit-panel { width: 100%; right: -100%; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">BHARATCRAFT</div>
+  <ul class="nav-links">
+    <li><a href="#ranks">Ranks</a></li>
+    <li><a href="#keys">Crate Keys</a></li>
+    <li><a href="#features">Features</a></li>
+  </ul>
+  <button class="nav-ip" onclick="copyIP()">📋 Copy IP</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-sparkle">✨</span>
+  <div class="hero-badge">🇮🇳 India's Premier Minecraft Server</div>
+  <h1 class="hero-title" id="hero-title-text">BHARATCRAFT</h1>
+  <p class="hero-sub" id="hero-sub-text">Where Ancient Legends Meet Endless Adventure</p>
+  <div class="hero-ip-box">
+    <div class="hero-ip-label">Server IP Address</div>
+    <div class="hero-ip-addr" onclick="copyIP()" id="server-ip-display" title="Click to copy">play.bharatcraft.net</div>
+  </div>
+  <div class="hero-cta">
+    <button class="btn-primary" onclick="document.getElementById('ranks').scrollIntoView({behavior:'smooth'})">View Ranks</button>
+    <button class="btn-secondary" onclick="document.getElementById('keys').scrollIntoView({behavior:'smooth'})">Crate Keys</button>
+  </div>
+  <div class="hero-divider">✦ Join thousands of players ✦</div>
+</section>
+
+<!-- FEATURES STRIP -->
+<div class="features-strip">
+  <div class="feature-item">
+    <div class="feature-icon">⚔️</div>
+    <div class="feature-title" id="feat1-title">Survival PvP</div>
+    <div class="feature-desc" id="feat1-desc">Epic battles across custom Indian-themed arenas</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">🏰</div>
+    <div class="feature-title" id="feat2-title">Kingdoms</div>
+    <div class="feature-desc" id="feat2-desc">Build your dynasty, conquer factions & rise to power</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">🎁</div>
+    <div class="feature-title" id="feat3-title">Daily Crates</div>
+    <div class="feature-desc" id="feat3-desc">Unlock powerful rewards every single day</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">🌏</div>
+    <div class="feature-title" id="feat4-title">Custom Maps</div>
+    <div class="feature-desc" id="feat4-desc">Explore handcrafted worlds inspired by Bharat</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">💎</div>
+    <div class="feature-title" id="feat5-title">Economy</div>
+    <div class="feature-desc" id="feat5-desc">Trade, sell, and dominate the server economy</div>
+  </div>
+</div>
+
+<!-- RANKS -->
+<section id="ranks">
+  <div class="section-header">
+    <div class="section-eyebrow">✦ Choose Your Title ✦</div>
+    <h2 class="section-title">Server <span>Ranks</span></h2>
+  </div>
+  <div class="ranks-grid" id="ranks-grid">
+
+    <!-- DEFAULT -->
+    <div class="rank-card" style="--rank-color:#9CA3AF;--rank-glow:rgba(156,163,175,0.08)">
+      <div class="rank-tag">⚪ Free</div>
+      <div class="rank-name">Villager</div>
+      <div class="rank-price">₹0 <span>/ forever</span></div>
+      <ul class="rank-perks">
+        <li>Access to Survival world</li>
+        <li>Basic /home & /spawn commands</li>
+        <li>1 home set</li>
+        <li>Public chat access</li>
+        <li>Join the community</li>
+      </ul>
+      <button class="rank-btn" style="--rank-color:#9CA3AF">Default Rank</button>
+    </div>
+
+    <!-- KNIGHT -->
+    <div class="rank-card" style="--rank-color:#4ADE80;--rank-glow:rgba(74,222,128,0.08)">
+      <div class="rank-tag">🟢 Rank I</div>
+      <div class="rank-name">Knight</div>
+      <div class="rank-price">₹99 <span>/ month</span></div>
+      <ul class="rank-perks">
+        <li>Green prefix in chat [Knight]</li>
+        <li>3 home sets</li>
+        <li>/nick — change your nickname</li>
+        <li>Access to /kit knight (weekly)</li>
+        <li>Fly in spawn region</li>
+        <li>50,000 in-game coins bonus</li>
+      </ul>
+      <button class="rank-btn" style="--rank-color:#4ADE80">Get Knight</button>
+    </div>
+
+    <!-- WARRIOR -->
+    <div class="rank-card" style="--rank-color:#60A5FA;--rank-glow:rgba(96,165,250,0.09)">
+      <div class="rank-tag">🔵 Rank II</div>
+      <div class="rank-name">Warrior</div>
+      <div class="rank-price">₹249 <span>/ month</span></div>
+      <ul class="rank-perks">
+        <li>Blue prefix in chat [Warrior]</li>
+        <li>5 home sets</li>
+        <li>/fly in all worlds</li>
+        <li>Access to /kit warrior (weekly)</li>
+        <li>1x Rare Crate Key monthly</li>
+        <li>Priority queue on join</li>
+        <li>1,50,000 in-game coins bonus</li>
+      </ul>
+      <button class="rank-btn" style="--rank-color:#60A5FA">Get Warrior</button>
+    </div>
+
+    <!-- RAJA — POPULAR -->
+    <div class="rank-card" style="--rank-color:#FFD700;--rank-glow:rgba(255,215,0,0.1)">
+      <div class="rank-popular">Most Popular</div>
+      <div class="rank-tag">⭐ Rank III</div>
+      <div class="rank-name">Raja</div>
+      <div class="rank-price">₹499 <span>/ month</span></div>
+      <ul class="rank-perks">
+        <li>Gold prefix in chat [Raja]</li>
+        <li>10 home sets</li>
+        <li>/fly everywhere + speed boost</li>
+        <li>Access to /kit raja (weekly)</li>
+        <li>2x Epic Crate Keys monthly</li>
+        <li>Custom join/leave messages</li>
+        <li>Private Discord channel access</li>
+        <li>3,00,000 in-game coins bonus</li>
+      </ul>
+      <button class="rank-btn" style="--rank-color:#FFD700">Get Raja</button>
+    </div>
+
+    <!-- MAHARAJA -->
+    <div class="rank-card" style="--rank-color:#F97316;--rank-glow:rgba(249,115,22,0.1)">
+      <div class="rank-tag">🔥 Rank IV</div>
+      <div class="rank-name">Maharaja</div>
+      <div class="rank-price">₹999 <span>/ month</span></div>
+      <ul class="rank-perks">
+        <li>Orange prefix in chat [Maharaja]</li>
+        <li>Unlimited home sets</li>
+        <li>/god mode in spawn</li>
+        <li>Access to /kit maharaja (weekly)</li>
+        <li>1x Legendary Crate Key monthly</li>
+        <li>Exclusive cosmetics & particles</li>
+        <li>+2 plots in creative world</li>
+        <li>5,00,000 in-game coins bonus</li>
+      </ul>
+      <button class="rank-btn" style="--rank-color:#F97316">Get Maharaja</button>
+    </div>
+
+    <!-- SAMRAT -->
+    <div class="rank-card" style="--rank-color:#E8174A;--rank-glow:rgba(232,23,74,0.1)">
+      <div class="rank-tag">👑 Rank V</div>
+      <div class="rank-name">Samrat</div>
+      <div class="rank-price">₹1999 <span>/ month</span></div>
+      <ul class="rank-perks">
+        <li>Red crown prefix [👑 Samrat]</li>
+        <li>Unlimited everything</li>
+        <li>Exclusive Samrat-only server events</li>
+        <li>Monthly Legendary + Mythic Key</li>
+        <li>Custom pet & trail effects</li>
+        <li>Direct line to server admins</li>
+        <li>Name featured on website hall</li>
+        <li>10,00,000 in-game coins bonus</li>
+      </ul>
+      <button class="rank-btn" style="--rank-color:#E8174A">Get Samrat</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- CRATE KEYS -->
+<section id="keys" style="background:linear-gradient(180deg,transparent,rgba(255,215,0,0.02),transparent)">
+  <div class="section-header">
+    <div class="section-eyebrow">✦ Open & Win ✦</div>
+    <h2 class="section-title">Crate <span>Keys</span></h2>
+  </div>
+  <div class="keys-grid" id="keys-grid">
+
+    <div class="key-card" style="--key-color:#9CA3AF">
+      <span class="key-icon">🗝️</span>
+      <div class="key-name">Common Key</div>
+      <div class="key-desc">Entry-level crate. Great for new players looking for basic gear.</div>
+      <div class="key-rewards">
+        <span class="key-reward-tag">Iron Gear</span>
+        <span class="key-reward-tag">Food Kits</span>
+        <span class="key-reward-tag">500 Coins</span>
+        <span class="key-reward-tag">XP Boosters</span>
+      </div>
+      <div class="key-price">₹29 <span>/ key</span></div>
+    </div>
+
+    <div class="key-card" style="--key-color:#4ADE80">
+      <span class="key-icon">🔑</span>
+      <div class="key-name">Rare Key</div>
+      <div class="key-desc">Better loot including enchanted items and bonus currency.</div>
+      <div class="key-rewards">
+        <span class="key-reward-tag">Diamond Gear</span>
+        <span class="key-reward-tag">Enchants</span>
+        <span class="key-reward-tag">5K Coins</span>
+        <span class="key-reward-tag">Vote Tokens</span>
+      </div>
+      <div class="key-price">₹79 <span>/ key</span></div>
+    </div>
+
+    <div class="key-card" style="--key-color:#60A5FA">
+      <span class="key-icon">💠</span>
+      <div class="key-name">Epic Key</div>
+      <div class="key-desc">High-tier rewards. Custom enchants, rare drops, and more.</div>
+      <div class="key-rewards">
+        <span class="key-reward-tag">Netherite Gear</span>
+        <span class="key-reward-tag">Custom Enchants</span>
+        <span class="key-reward-tag">25K Coins</span>
+        <span class="key-reward-tag">Rank Tokens</span>
+      </div>
+      <div class="key-price">₹199 <span>/ key</span></div>
+    </div>
+
+    <div class="key-card" style="--key-color:#FFD700">
+      <span class="key-icon">🏆</span>
+      <div class="key-name">Legendary Key</div>
+      <div class="key-desc">Exclusive loot only available from this crate. Very rare items!</div>
+      <div class="key-rewards">
+        <span class="key-reward-tag">OP Weapons</span>
+        <span class="key-reward-tag">Pets</span>
+        <span class="key-reward-tag">1L Coins</span>
+        <span class="key-reward-tag">Rank Upgrade</span>
+      </div>
+      <div class="key-price">₹499 <span>/ key</span></div>
+    </div>
+
+    <div class="key-card" style="--key-color:#E8174A">
+      <span class="key-icon">🔮</span>
+      <div class="key-name">Mythic Key</div>
+      <div class="key-desc">The rarest key on BharatCraft. God-tier drops and server exclusives.</div>
+      <div class="key-rewards">
+        <span class="key-reward-tag">God Armor</span>
+        <span class="key-reward-tag">Exclusive Titles</span>
+        <span class="key-reward-tag">5L Coins</span>
+        <span class="key-reward-tag">Free Rank</span>
+      </div>
+      <div class="key-price">₹999 <span>/ key</span></div>
+    </div>
+
+    <div class="key-card" style="--key-color:#A78BFA">
+      <span class="key-icon">🌟</span>
+      <div class="key-name">Vote Key</div>
+      <div class="key-desc">Earned for free by voting for BharatCraft every day!</div>
+      <div class="key-rewards">
+        <span class="key-reward-tag">Random Loot</span>
+        <span class="key-reward-tag">XP</span>
+        <span class="key-reward-tag">Coins</span>
+        <span class="key-reward-tag">Surprises</span>
+      </div>
+      <div class="key-price">FREE <span>via /vote</span></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="features">
+  <div>
+    <div class="footer-logo">BHARATCRAFT ✨</div>
+    <div class="footer-text" style="margin-top:8px" id="footer-tagline">India's finest Minecraft experience. Join us today!</div>
+  </div>
+  <div class="footer-links">
+    <a href="#" id="footer-discord">Discord</a>
+    <a href="#" id="footer-store">Store</a>
+    <a href="#" id="footer-rules">Rules</a>
+    <a href="#" id="footer-support">Support</a>
+  </div>
+  <div class="footer-text">© 2025 BharatCraft. Not affiliated with Mojang.</div>
+</footer>
+
+<!-- TOAST -->
+<div id="toast">✦ Copied to clipboard!</div>
+
+<!-- EDIT TOGGLE -->
+<button id="edit-toggle" onclick="toggleEdit()" title="Edit Website">✏️</button>
+
+<!-- EDIT PANEL -->
+<div id="edit-panel">
+  <button class="edit-close" onclick="toggleEdit()">✕</button>
+  <div class="edit-panel-title">✦ Edit BharatCraft</div>
+
+  <div class="edit-section-label">🌐 General Info</div>
+
+  <div class="edit-group">
+    <label class="edit-label" for="e-server-ip">Server IP</label>
+    <input class="edit-input" id="e-server-ip" value="play.bharatcraft.net" placeholder="play.yourserver.net"/>
+  </div>
+
+  <div class="edit-group">
+    <label class="edit-label" for="e-hero-sub">Hero Tagline</label>
+    <input class="edit-input" id="e-hero-sub" value="Where Ancient Legends Meet Endless Adventure"/>
+  </div>
+
+  <div class="edit-group">
+    <label class="edit-label" for="e-footer-tagline">Footer Tagline</label>
+    <input class="edit-input" id="e-footer-tagline" value="India's finest Minecraft experience. Join us today!"/>
+  </div>
+
+  <div class="edit-section-label">🔗 Footer Links</div>
+  <div class="edit-group">
+    <label class="edit-label" for="e-discord">Discord URL</label>
+    <input class="edit-input" id="e-discord" value="#" placeholder="https://discord.gg/..."/>
+  </div>
+  <div class="edit-group">
+    <label class="edit-label" for="e-store">Store URL</label>
+    <input class="edit-input" id="e-store" value="#" placeholder="https://store.bharatcraft.net"/>
+  </div>
+  <div class="edit-group">
+    <label class="edit-label" for="e-rules">Rules URL</label>
+    <input class="edit-input" id="e-rules" value="#" placeholder="https://..."/>
+  </div>
+  <div class="edit-group">
+    <label class="edit-label" for="e-support">Support URL</label>
+    <input class="edit-input" id="e-support" value="#" placeholder="https://..."/>
+  </div>
+
+  <div class="edit-section-label">🏆 Feature Labels</div>
+  <div class="edit-group">
+    <label class="edit-label">Feature 1 Title</label>
+    <input class="edit-input" id="e-feat1" value="Survival PvP"/>
+  </div>
+  <div class="edit-group">
+    <label class="edit-label">Feature 2 Title</label>
+    <input class="edit-input" id="e-feat2" value="Kingdoms"/>
+  </div>
+  <div class="edit-group">
+    <label class="edit-label">Feature 3 Title</label>
+    <input class="edit-input" id="e-feat3" value="Daily Crates"/>
+  </div>
+  <div class="edit-group">
+    <label class="edit-label">Feature 4 Title</label>
+    <input class="edit-input" id="e-feat4" value="Custom Maps"/>
+  </div>
+  <div class="edit-group">
+    <label class="edit-label">Feature 5 Title</label>
+    <input class="edit-input" id="e-feat5" value="Economy"/>
+  </div>
+
+  <div class="edit-section-label">📋 Custom Announcement</div>
+  <div class="edit-group">
+    <label class="edit-label" for="e-announce">Announcement (shown in hero badge)</label>
+    <input class="edit-input" id="e-announce" value="🇮🇳 India's Premier Minecraft Server"/>
+  </div>
+
+  <br/>
+  <button class="edit-apply" onclick="applyEdits()">✦ Apply Changes</button>
+  <br/><br/>
+  <button class="edit-apply" style="background:linear-gradient(135deg,#1a6eff,#00eeff);margin-top:8px" onclick="downloadSite()">⬇ Download HTML</button>
+</div>
+
+<script>
+  // IP copy
+  function copyIP() {
+    const ip = document.getElementById('server-ip-display').textContent;
+    navigator.clipboard.writeText(ip).then(() => showToast('✦ IP Copied: ' + ip));
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // Edit panel
+  function toggleEdit() {
+    document.getElementById('edit-panel').classList.toggle('open');
+  }
+
+  function applyEdits() {
+    // IP
+    const ip = document.getElementById('e-server-ip').value;
+    document.getElementById('server-ip-display').textContent = ip;
+
+    // Taglines
+    document.getElementById('hero-sub-text').textContent = document.getElementById('e-hero-sub').value;
+    document.getElementById('footer-tagline').textContent = document.getElementById('e-footer-tagline').value;
+
+    // Badge
+    document.querySelector('.hero-badge').textContent = document.getElementById('e-announce').value;
+
+    // Links
+    document.getElementById('footer-discord').href = document.getElementById('e-discord').value;
+    document.getElementById('footer-store').href = document.getElementById('e-store').value;
+    document.getElementById('footer-rules').href = document.getElementById('e-rules').value;
+    document.getElementById('footer-support').href = document.getElementById('e-support').value;
+
+    // Features
+    document.getElementById('feat1-title').textContent = document.getElementById('e-feat1').value;
+    document.getElementById('feat2-title').textContent = document.getElementById('e-feat2').value;
+    document.getElementById('feat3-title').textContent = document.getElementById('e-feat3').value;
+    document.getElementById('feat4-title').textContent = document.getElementById('e-feat4').value;
+    document.getElementById('feat5-title').textContent = document.getElementById('e-feat5').value;
+
+    showToast('✦ Changes Applied!');
+  }
+
+  function downloadSite() {
+    applyEdits();
+    const html = '<!DOCTYPE html>' + document.documentElement.outerHTML;
+    const blob = new Blob([html], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'bharatcraft-website.html';
+    a.click();
+    showToast('✦ Downloading...');
+  }
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.rank-card, .key-card').forEach((el, i) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = `opacity 0.5s ${i * 0.07}s ease, transform 0.5s ${i * 0.07}s ease, box-shadow 0.3s, border-color 0.3s`;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
